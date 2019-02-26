@@ -1,0 +1,77 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\usepackage[T1]{fontenc} % Font encoding: T1
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\beamertemplatenavigationsymbolsempty
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\newtheorem{proposition}{Proposition}
+\newcommand{\E}[1]{\operatorname{E}\left[#1\right]}
+
+\author{\textbf{Stephen P. Ryan, (ECMA, 2012)}\\~\\
+presented by Paul Anthony Sarkis}
+\title{The Costs Of Environmental Regulation
+In A Concentrated Industry}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+%\date{} 
+%\subject{} 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Setting}
+\begin{itemize}
+\item Clean Air Act (Amendments of 1990)
+\begin{itemize}
+\item Regulation to reduce emissions
+\item Engineering estimates for CBA (static) = based mainly on compliance cost
+\item[]
+\end{itemize}
+\item[$\Rightarrow$] Miss the effect of sunk costs and investment costs 
+\item[]
+\item BUT they are important:
+\begin{itemize}
+\item Leads to fewer firms and lower production
+\item In already concentrated industries!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Empirical Strategy}
+\begin{itemize}
+\item Estimation of a dynamic oligopoly model using a two-step estimator (Bajari, Benkard and Levin, 2007)
+\begin{itemize}
+\item 1st step: recover what firms do
+\item 2nd step: recover params that rationalize choices
+\item[]
+\end{itemize}
+\item Simulation of the model to compute variables:
+\begin{itemize}
+\item Welfare (producer and consumer)
+\item Number and size of firms
+\item Costs distribution before/after
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
