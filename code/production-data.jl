@@ -47,5 +47,9 @@ dfProd = by(dfProd, [:firmID, :year, :Market],
             cap = :cap => sum)
 
 # Adding variables for production game
-dfProd[:α_0] = regiontoconst.(dfProd[:Market])
 dfProd[:post1990] = (dfProd[:year] .> 1990.0) .* 1.0
+
+# Creating dictionaries to store variables
+dCap = Dict(convert(Vector, dfProd[[:firmID, :year, :Market]][i, :]) => dfProd[:cap][i] for i in 1:size(dfProd, 1))
+dProd = Dict(convert(Vector, dfProd[[:firmID, :year, :Market]][i, :]) => dfProd[:prod][i] for i in 1:size(dfProd, 1))
+d1990 = Dict(convert(Vector, dfProd[[:firmID, :year, :Market]][i, :]) => dfProd[:post1990][i] for i in 1:size(dfProd, 1))

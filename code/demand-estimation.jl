@@ -45,3 +45,5 @@ dfDemandParams = by(df, :region, α_0 = :mconst => mean)
 for i in 1:length(vMkts)
     dα_0[dfDemandParams[:region][i]] = dfDemandParams[:α_0][i]
 end
+
+regiontoconst(region) = dα_0[region]
