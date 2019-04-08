@@ -1,6 +1,3 @@
-using CSV
-using DataFrames
-
 # Input file
 dataFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\data\\"
 df = CSV.read(dataFolder * "cementDec2009.csv")

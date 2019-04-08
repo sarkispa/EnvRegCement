@@ -1,7 +1,3 @@
-using CSV
-using DataFrames
-using Statistics
-
 dataFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\data\\"
 pcafiles = readdir(dataFolder)[(readdir(dataFolder) .> "p") .* (readdir(dataFolder) .< "q")]
 

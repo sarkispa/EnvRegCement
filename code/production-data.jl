@@ -1,8 +1,3 @@
-using CSV
-using DataFrames
-using Statistics
-using Impute
-
 # Input files
 dataFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\data\\"
 codeFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\code\\"
@@ -53,3 +48,14 @@ dfProd[:post1990] = (dfProd[:year] .> 1990.0) .* 1.0
 dCap = Dict(convert(Vector, dfProd[[:firmID, :year, :Market]][i, :]) => dfProd[:cap][i] for i in 1:size(dfProd, 1))
 dProd = Dict(convert(Vector, dfProd[[:firmID, :year, :Market]][i, :]) => dfProd[:prod][i] for i in 1:size(dfProd, 1))
 d1990 = Dict(convert(Vector, dfProd[[:firmID, :year, :Market]][i, :]) => dfProd[:post1990][i] for i in 1:size(dfProd, 1))
+
+# Create dictionary to get active firms by Market, year
+vYears = unique(dfProd.year)
+vMkts = unique(dfProd.Market)
+
+dMkttoFirms = Dict()
+for mkt in vMkts
+    for year in vYears
+        dMkttoFirms[mkt, year] = unique(dfProd[(dfProd[:Market] .== mkt).*(dfProd[:year] .== year), :].firmID)
+    end
+end
