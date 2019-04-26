@@ -1,3 +1,9 @@
+using CSV
+using DataFrames
+using Statistics
+using Impute
+using FixedEffectModels
+
 codeFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\code\\"
 include(codeFolder * "demand-data.jl")
 
@@ -41,5 +47,5 @@ dfDemandParams = by(df, :region, α_0 = :mconst => mean)
 for i in 1:length(vMkts)
     dα_0[dfDemandParams[:region][i]] = dfDemandParams[:α_0][i]
 end
-
+dα_0
 regiontoconst(region) = dα_0[region]

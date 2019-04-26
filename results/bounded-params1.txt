@@ -1,0 +1,1 @@
+Dict{Any,Any}("fun"=>32261.1,"nit"=>3,"nfev"=>130,"status"=>0,"success"=>true,"message"=>"Optimization terminated successfully.","x"=>[24.9223, 0.233198, 0.80774],"direc"=>[0.0 0.0 1.0; 0.0 1.0 0.0; 1.35246 -0.00858453 0.000710291]) 

@@ -1,3 +1,9 @@
+using CSV
+using DataFrames
+using Statistics
+using Impute
+using FixedEffectModels
+
 # Input files
 dataFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\data\\"
 codeFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\code\\"
@@ -23,6 +29,20 @@ end
 
 chain(df, Impute.LOCF(); limit=0.8)
 
+df[Symbol("ZIP Code")] = [df[Symbol("ZIP Code")][i][1:minimum([length(df[Symbol("ZIP Code")][i]), 5])] for i in 1:size(df,1)]
+df[Symbol("ZIP Code")] = parse.(Int64, df[Symbol("ZIP Code")])
+
+# Differentiate Pennsylvania
+df[:State] = [(df[Symbol("ZIP Code")][i] < 16891)*(df[Symbol("ZIP Code")][i] > 15000) ? "PAW" : df[:State][i] for i in 1:size(df,1)]
+df[:State] = [df[:State][i] == "PA" ? "1P" : df[:State][i] for i in 1:size(df,1)]
+df[:State] = [df[:State][i] == "PAW" ? "PA" : df[:State][i] for i in 1:size(df,1)]
+
+# Differentiate Texas
+df[:State] = [(df[Symbol("ZIP Code")][i] < 76000)*(df[Symbol("ZIP Code")][i] > 74999 ) | (df[Symbol("ZIP Code")][i] < 79000)*(df[Symbol("ZIP Code")][i] > 76999 ) ? "1T" : df[:State][i] for i in 1:size(df,1)]
+
+# Differentiate California
+df[:State] = [(df[Symbol("ZIP Code")][i] < 94000)*(df[Symbol("ZIP Code")][i] > 91000 ) ? "1C" : df[:State][i] for i in 1:size(df,1)]
+
 # Grouping states into markets
 dStateToMkt = Dict()
 for state in unique(df.State)
@@ -31,13 +51,13 @@ end
 statetomkt(state) = dStateToMkt[state]
 df[:Market] = statetomkt.(df[:State])
 
-
+unique(df.Market)
 # Grouping dataset into firm-year-market level
-dfProd = by(df, [:firmID, Symbol("Plant Location"), :year, :Market],
+dfProd = by(df, [:Market, :year, :firmID, Symbol("Plant Location")],
             prod = Symbol("Clinker Capacity Tons/Year (000)") => sum,
             cap = Symbol("Finish Grinding Capacity") => mean)
 
-dfProd = by(dfProd, [:firmID, :year, :Market],
+dfProd = by(dfProd, [:Market, :year, :firmID],
             prod = :prod => sum,
             cap = :cap => sum)
 

@@ -8,6 +8,7 @@
 *.snm
 *.synctex.gz
 *.toc
+*.opt
 /data/
 /originalcode/
 oREADME.txt
