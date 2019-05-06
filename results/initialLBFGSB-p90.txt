@@ -1,0 +1,1 @@
+Dict{Any,Any}("hess_inv"=>PyObject <3x3 LbfgsInvHessProduct with dtype=float64>,"fun"=>70097.0,"nfev"=>120,"nit"=>12,"status"=>0,"message"=>"CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH","x"=>[29.643, 1.26489, 0.90224],"jac"=>[-124.519, 62.7333, 55484.6],"success"=>true) 

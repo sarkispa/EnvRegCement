@@ -9,7 +9,7 @@ function solve_game_mcp(mkt, year, params)
     m = MCPModel()
 
     ## Choice variables (quantity)
-    @variable(m, q[j in vFirms] >= 0.0, start=dProd[[j, year, mkt]]) #dCap[[j, year, mkt]] >=
+    @variable(m, q[j in vFirms] >= 0.0, start=dProd[[j, year, mkt]])#dCap[[j, year, mkt]] >=
 
     ## Parameters
     @mapping(m, K[j in vFirms], dCap[[j, year, mkt]])

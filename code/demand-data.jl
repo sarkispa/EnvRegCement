@@ -17,3 +17,5 @@ df[:lq] = log.(df[:shipped])
 df[:lp] = log.(df[:price])
 df[:lpop] = log.(df[:population])
 df[:lpermits] = log.(df[:totalpermits])
+
+describe(df)

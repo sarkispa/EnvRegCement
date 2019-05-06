@@ -1,3 +1,0 @@
-Dict{Any,Any}("fun"=>56918.4,"nit"=>6,"nfev"=>480,"status"=>0,"success"=>true,"message"=>"Optimization terminated successfully.","x"=>[31.5667, 0.211261, 0.767493],"direc"=>[0.0 0.0 1.0; 0.0 1.0 0.0; -0.0211189 0.00012834 1.63956e-6]) 
-Dict{Any,Any}("fun"=>54423.9,"nit"=>2,"nfev"=>206,"status"=>0,"success"=>true,"message"=>"Optimization terminated successfully.","x"=>[29.6844, 0.231946, 0.769193],"direc"=>[1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0]) 
-Dict{Any,Any}("fun"=>55549.7,"nit"=>3,"nfev"=>336,"status"=>0,"success"=>true,"message"=>"Optimization terminated successfully.","x"=>[29.5071, 0.217293, 0.769788],"direc"=>[1.0 0.0 0.0; 0.0 0.0 1.0; -0.0353267 0.000281882 3.86893e-6]) 

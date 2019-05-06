@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{libertine}
+\usepackage[varg]{newtxmath}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{natbib}
+
+\def\D{\mathrm{d}}
+
+\newtheorem{remark}{Remark}
+
+\setlength{\parindent}{0ex}
+\setlength{\parskip}{1em}%Espacement des par
+
+\newcommand{\E}[1]{\operatorname{E}\left[#1\right]}
+\newcommand{\Et}[1]{\operatorname{E}_t\left[#1\right]}
+\newcommand{\V}[1]{\operatorname{Var}\left[#1\right]}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+\newcommand{\covt}[1]{\operatorname{Cov}_t\left(#1\right)}
+\newcommand{\avg}[2]{\frac{#1}{#2} \sum_{i=#1}^{#2}}
+\def\D{\mathrm{d}}
+\newcommand{\Prob}[1]{\operatorname{Pr}\left[#1\right]}
+\newcommand{\Probhat}[1]{\hat{\operatorname{Pr}}\left[#1\right]}
+\newcommand{\plim}{\operatorname{plim}}
+\newcommand{\pconv}{\overset{\text{p}}{\to}}
+\newcommand{\dconv}{\overset{\text{d}}{\to}}
+\newcommand{\msconv}{\overset{\text{ms}}{\to}}
+\def\D{\mathrm{d}}
+
+
+\title{\vspace{-70pt} ECON8855 - Replication Results\\ \textbf{The Costs of Environmental Regulation in a Concentrated Industry} \\ \textit{by Stephen P. Ryan}}
+\author{replicated by Paul Anthony Sarkis}
+
+\begin{document}
+
+\maketitle
+
+\section{Summary Statistics}
+
+There are two datasets shared (and used) in this paper: the first one combines supply and demand data at the market level, while the second one consists of production and investment data at the plant level. In order to replicate the results, the necessary first step was to compare the summary statistics that could be extracted from the dataset shared and the ones presented in the paper. The summary statistics of this  replication are presented in \ref{tab:summstat}.
+
+Already, discrepancies appear in some ``interior'' statistics like the mean and standard deviation. Moreover, the text mentions 27 different markets while a simple grouping of the dataset shared yields only 22 markets. After further investigation, I found two reasons for that. First of all, some markets are supposed to be differentiated and are not in the data, for example, in the Minerals Yearbook, the state of Pennsylvania is divided between western PA and eastern PA. However, the shared data only shows PA (with two observations per year). I had to come back to the Yearbooks and separate these markets ``by hand''. Since this affected three states (PA, TX and CA), it yielded three more markets. The second reason for the lower number of markets comes from a inherent flaw in the shared dataset. In fact, the Minerals Yearbook defines some markets as combinations of two or more states and this definition is fixed over the years. In the shared datasets, the combinations do not correspond to the ones in the Yearbook. It is not clear if Ryan used the true combinations or the ones in the shared dataset, however, from the fact that I am not getting even the summary statistics right, I guess that he shared a reshuffled dataset. This fact needs to be taken into account when trying to interpret the results of this replication.
+
+\section{Main results}
+
+\subsection{Product Market Profits and Policy Functions}
+
+\subsubsection{Cement Demand}
+
+The estimation of cement demand is pretty straightforward. Using the panel data of production, prices and other market characteristics at the market-year level, a log-log demand specification is estimated. In particular, the regression is defined as: $$\ln Q_{jt} = \alpha_0 + \alpha_1\ln P_{jt} + \alpha_{2j} + \alpha_{3t}'X_{jt} + \epsilon_{jt} $$
+Endogeneity of prices is instrumented with supply-shifters such as input costs (gas, coal and electricity) and labor costs (wages). Other controls typically relate to the size of the market's economy using population, number of housing permits, etc. In the end, these covariates do not matter since the author chooses a specification that does not include them. Market-level fixed-effects are nonetheless included in the regression. Results of all specifications are shown in \ref{tab:demand}.
+
+
+
+We can see that...
+
+\subsubsection{Production Costs}
+
+The estimation of production costs is done using nonlinear least-squares on the difference between simulated market quantities and actual quantities. Although the execution can prove to be quite cumbersome, the intuition is quite simple. In fact, having estimated demand for each market, we assume all firms share the same cost function in the form of: $$C(q_i, s_i; \delta) = \delta_1 \cdot q_i + \delta_2 \cdot 1[q_i > \nu\cdot s_i] \cdot (q_i - \nu\cdot s_i)^2 $$
+Then, using this cost function, we solve for the Cournot equilibrium quantities in all markets and compare them to actual quantities. The nonlinear least-squares estimation procedure solves for the parameter vector $\delta$ that minimizes the average square distance between simulated and actual quantities. Note that two estimations are done: one for pre-1990 and one for post-1990 (1990 included). The final results are shown in \ref{tab:prodcosts}.
+
+
+
+We can see that the results that are achieved in this step are mixed. First, we can see that both $\delta_1$ and $\nu$ are somewhat close to the results presented in the paper. However, the estimated value of $\delta_2$ varies widely between the replication and the paper. In order to compare them further, a good test is to evaluate the average least-squares deviation for different values of $\delta_2$ and compare.
+
+\subsubsection{Investment Policy Function}
+
+
+
+\subsubsection{Entry and Exit Policy Functions}
+
+
+
+\subsection{Recovering the Structural Parameters}
+
+
+
+\end{document}
