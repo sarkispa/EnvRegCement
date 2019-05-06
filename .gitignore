@@ -11,4 +11,5 @@
 *.opt
 /data/
 /originalcode/
-oREADME.txt
+/paper/
+/presentation/
