@@ -51,11 +51,14 @@ end
 statetomkt(state) = dStateToMkt[state]
 df[:Market] = statetomkt.(df[:State])
 
-unique(df.Market)
 # Grouping dataset into firm-year-market level
 dfProd = by(df, [:Market, :year, :firmID, Symbol("Plant Location")],
             prod = Symbol("Clinker Capacity Tons/Year (000)") => sum,
             cap = Symbol("Finish Grinding Capacity") => mean)
+
+# describe(dfProd)
+# aggregate(dfProd[:, 5:6], std)
+# dfProd[dfProd.cap .< 196.0, :]
 
 dfProd = by(dfProd, [:Market, :year, :firmID],
             prod = :prod => sum,

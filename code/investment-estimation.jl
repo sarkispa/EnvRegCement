@@ -1,10 +1,6 @@
-using JuMP, Complementarity
 using CSV
 using DataFrames
 using Statistics
-using Impute
-using FixedEffectModels
-using NLsolve
 using PyCall
 si = pyimport("scipy.interpolate")
 
@@ -55,6 +51,7 @@ dfInv = dfDiff[abs.(dfDiff[:inv]) .> 0.0, :] # Only keep abs. positive inv.
 
 # Band estimation
 splBands = si.SmoothBivariateSpline(dfInv.cap_m1, dfInv.compcap_m1, dfInv.linv)
+splBands.get_knots()
 
 # Target cap. estimation
 splTarget = si.SmoothBivariateSpline(dfInv.cap_m1, dfInv.compcap_m1, dfInv.lcap)

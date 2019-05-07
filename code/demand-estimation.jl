@@ -7,7 +7,8 @@ using FixedEffectModels
 codeFolder = "C:\\Users\\18579\\GitHub\\EnvRegCement\\code\\"
 include(codeFolder * "demand-data.jl")
 
-describe(df)
+# describe(df)
+# aggregate(df[:, 3:10], std)
 
 # Demand curve estimation
 
