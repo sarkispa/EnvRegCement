@@ -1,0 +1,251 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Font encoding: T1
+\usepackage[sfdefault,scaled=.85]{FiraSans}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{itemize items}[circle]
+
+\newcommand{\Prob}[1]{\operatorname{Pr}\left[#1\right]}
+
+%\setlength{\leftmargini}{10.5pt}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\newtheorem{proposition}{Proposition}
+\newcommand{\E}[1]{\operatorname{E}\left[#1\right]}
+
+\author{Paul Anthony Sarkis}
+\title{The Costs of Environmental Regulation
+in a Concentrated Industry \\
+\textit{(Ryan, ECMA 2012)}}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+%\date{} 
+%\subject{} 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Context}
+Clean Air Act in 1990 = regulation in polluting ind.\begin{itemize}
+\item Increased costs of investment
+\item Increased costs of entry
+\item[$\Rightarrow$] Potential issue in concentrated industries
+\item[]
+\end{itemize}
+Dynamic oligopoly analysis (vs. typical engineering estimates)
+\begin{itemize}
+\item Recover sunk costs, scrap values, investment costs
+\item Consider dynamic effects ($\uparrow$ concentration)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Methodology}
+Bajari, Benkard and Levin (2007) two-step estimator:
+\begin{enumerate}
+\item Estimate policy functions (equilibrium behavior)
+\item Recover parameters that ``justify'' policy functions
+\item[]
+\end{enumerate}
+In this paper:
+\begin{itemize}
+\item Product market profits (Cournot)
+\item Policy functions (state var. = capacity)
+\begin{itemize}
+\item Investment/Divestment
+\item Entry/Exit
+\end{itemize}
+\item ``Dynamic part''
+\end{itemize}
+\end{frame}
+
+\section{Data and Summary Statistics}
+
+\begin{frame}{Paper dataset vs. Shared dataset}
+Two datasets in use:\begin{enumerate}
+\item Market-level demand/supply data
+\item Plant-level production/investment data
+\item[]
+\end{enumerate}
+First problems arise: by simple grouping, only 22 mkts (vs. 27)
+\begin{itemize}
+\item Some markets within a state are not ``separated''
+\begin{itemize}
+\item[](ex. PA represents WPA and EPA)
+\item[$\Rightarrow$] + 3 markets
+\end{itemize}
+\item Some combinations of states are ``shuffled''
+\begin{itemize}
+\item[](ex. MDVAWV while MD should be alone)
+\item[$\Rightarrow$] + 2 markets (but impossible to do)
+\end{itemize}
+\end{itemize}
+\begin{center}
+Bottomline: not identical dataset
+\end{center}
+\end{frame}
+
+
+\section{Main Results}
+
+\begin{frame}{Plan}
+\begin{enumerate}
+\item Product market game:
+\begin{enumerate}
+\item Cement demand estimation
+\item Cost function estimation
+\item[]
+\end{enumerate}
+\item Policy function estimation:
+\begin{enumerate}
+\item Investment/Divestment policy function
+\item Entry/exit policy function
+\item[]
+\end{enumerate}
+\item Dynamic part:
+\begin{enumerate}
+\item Incumbents' problem estimation
+\item Entrants' problem estimation
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Cement Demand Estimation}
+$$\ln Q_{jt} = \alpha_0 + \alpha_1\ln P_{jt} + \alpha_{2j} + \alpha_{3t}'X_{jt} + \epsilon_{jt} $$
+Different specifications are tested:\begin{itemize}
+\item Market size controls: population, construction permits
+\item Market Fixed Effects
+\item[$\Rightarrow$] Choose no controls but fixed effects. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Production Costs Estimation}
+$$C(q_i, s_i; \delta) = \delta_1 \cdot q_i + \delta_2 \cdot 1[q_i > \nu\cdot s_i] \cdot (q_i - \nu\cdot s_i)^2 $$
+Estimation using NLLS:\begin{itemize}
+\item For a given guess of parameters:
+\begin{itemize}
+\item Solve the Cournot game in each market-year
+\item Compare simulated quantities with actual (MSE)
+\item Update parameters
+\item[]
+\end{itemize}
+\item BUT objective function is highly nonlinear and takes time:
+\begin{itemize}
+\item[$\Rightarrow$] Global methods $>$ gradient-based
+\item[$\Rightarrow$] Less function eval. $>$ More function eval.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Solving the NLLS Problem}
+\textit{Intuition:} Brute force until I figure out the optimal ``area'', then Powell algorithm.\\~\\
+Pre-1990 period:
+\begin{itemize}
+\item Five rounds of brute force on a $7\times 7\times 7$ grid
+\begin{itemize}
+\item[] (Not a lot but already $\sim 2$ hrs...)
+\end{itemize}
+\item Then Powell multiple times (w/ different starting values)
+\item[]
+\end{itemize}
+Post-1990 period:
+\begin{itemize}
+\item Brute force is not very effective...
+\begin{itemize}
+\item[] (Because obj. fun. is very flat)
+\item[$\Rightarrow$] Only three rounds of BF
+\end{itemize}
+\item Then Powell multiple times (w/ different starting values)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Investment Policy Function}
+\begin{center}
+(S, s) rule of investment!
+\end{center}
+Each firm has (1) a target capacity and (2) adjustment bands.
+\begin{itemize}
+\item If current cap. is within bands = no investment
+\item If current cap. is outside bands = investment to target
+\item[$=$] Captures lumpy investment behavior
+\item[]
+\end{itemize}
+Based on two assumptions:
+\begin{enumerate}
+\item Firms adjust as soon as they hit bands = id. bands
+\item Firms always adjust to target cap. = id. target
+\item[$\Rightarrow$] Any observed non-zero investment tells us about both!
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Investment Policy Function: Estimation}
+$$\textit{(Target): } \ln(s_{it}^*) = \operatorname{Bs}\left(s_{it}, \sum_{j\neq i} s_{jt}\right) $$
+$$\textit{(Bands): } \ln(s_{it}^* - s_{it}) = \operatorname{Bs}\left(s_{it}, \sum_{j\neq i} s_{jt}\right) $$
+where $\operatorname{Bs}(\cdot)$ is a cubic bivariate B-spline.
+\end{frame}
+
+\begin{frame}{Entry/Exit Policy Functions}
+Simple probit regression: entry/exit probability on state variables.
+$$ \Prob{\textit{entry}|s_i =0, s} = \Phi\left(\psi_1 + \psi_2\cdot\left(\sum_{j\neq i} s_{jt}\right) + \psi_3\cdot 1[t \geq 1990]\right) $$
+$$ \Prob{\textit{exit}|s_{it}, s} = \Phi\left(\psi_1 + \psi_2\cdot s_{it} + \psi_3\cdot\left(\sum_{j\neq i} s_{jt}\right) + \psi_4\cdot 1[t \geq 1990]\right) $$
+\end{frame}
+
+\begin{frame}{Incumbents' dynamic payoffs}
+\begin{center}
+Most difficult part to understand...
+\end{center}
+Equilibrium per-period payoff function:
+\begin{align*}
+\E{\pi_i(s, \sigma(s); \theta)} = \bar \pi_i(s) - & p_i(s) \cdot(\tilde \gamma_{1i} + \gamma_2 x_i + \gamma_3 x_i^2) \\ +  & p_d(s) \cdot(\tilde \gamma_{4i} + \gamma_5 x_i + \gamma_6 x_i^2) \\ + & p_e(s)\cdot \tilde{\phi}_i
+\end{align*}
+Normally, this function is linear in uncoditional distribution parameters! Here, where are they?
+\end{frame}
+
+\begin{frame}{What I would have done}
+Consider the exit decision:
+\begin{itemize}
+\item $\tilde{\phi}_i$ is the expected scrap value conditional on exiting: $$\tilde{\phi}_i = \E{\phi_i | \phi > \E{\max\{V_i^+(s) - \gamma_{1i}, V_i^-(s) - \gamma_{4i}, V_i^0(s)\}}} $$
+\item So given that $\phi \sim N(\mu_{\phi}, \sigma_{\phi}^2)$, then:  $$\tilde{\phi}_i = \mu_{\phi} + \sigma_{\phi} \cdot \lambda(\E{\max\{...\}}) $$
+where $\lambda(\cdot)$ is the inverse Mills ratio.
+\item[$\Rightarrow$] If we had $\E{\max\{...\}}$ = linear in distribution parameters!
+\item[]
+\end{itemize}
+\begin{center}
+Then, do typical BBL!
+\end{center}
+\end{frame}
+
+\begin{frame}{Entrants' dynamic payoffs}
+\begin{center}
+Could be done if previous step was done!
+\end{center}
+Value function:
+$$V_i^e(s; \sigma(s), \theta) = \max\{0, \max_{x_i\geq 0} -\kappa_i - \gamma_{1i} - \gamma_2x_i - \gamma_3x_i^2 + W_i(\sigma(s))\} $$
+where $\kappa_i$ is entry cost draw.\\~\\
+
+Firm will enter iff:
+$$\Prob{\kappa_i + \gamma_{1i} \leq EV^e(s)} = \Phi\left( EV^e(s)\right) $$ where $\Phi = N(\mu_\kappa + \mu_\gamma^+, \sigma_\kappa^2 + \sigma_\gamma^2)$ $\Rightarrow$ solve by NLLS!
+\end{frame}
+
+
+\section{Discussion}
+
+\end{document}
